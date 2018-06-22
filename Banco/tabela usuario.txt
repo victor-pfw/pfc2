@@ -1,0 +1,84 @@
+﻿CREATE TABLE usuario
+(
+  id_usuario serial NOT NULL,
+  email varchar(30) NOT NULL,
+  login varchar(10) NOT NULL,
+  senha varchar(10)  NOT NULL,
+  perfil varchar(20)  NOT NULL,
+  ativo boolean,
+  CONSTRAINT usuario_pkey PRIMARY KEY (id_usuario)
+);
+
+
+
+CREATE TABLE reserva 
+(
+id_reserva serial NOT NULL,
+
+nome varchar(30) NOT NULL,
+email VARCHAR(30) NOT NULL,
+telefone VARCHAR(20) NOT NULL,
+data_reserva date   NOT NULL,
+hora_reserva time NOT NULL,
+quantidade_pessoa varchar(10) NOT NULL,
+ativo boolean,
+flag_reserva boolean,
+
+Fk_key int,
+
+
+CONSTRAINT reserva_pkey PRIMARY KEY(id_reserva),
+CONSTRAINT FK_reserva_pkey FOREIGN KEY (Fk_key) REFERENCES usuario(id_usuario)
+
+);
+
+
+CREATE TABLE lugares
+(
+id_lugares serial NOT NULL,
+quantidade int,
+data_disponiveis date,
+CONSTRAINT lugares_pkey PRIMARY KEY (id_lugares)
+);
+
+CREATE TABLE lista_espera
+(
+id_lista_reserva serial NOT NULL,
+
+email VARCHAR(30) NOT NULL,
+ativo_lista boolean,
+ 
+CONSTRAINT id_lista_reserva_pkey PRIMARY KEY(id_lista_reserva)
+
+
+
+);
+
+
+select id_usuario, email,login from usuario where login='teste' and ativo ='t'
+
+select*from usuario
+select*from reserva
+select*from lugares
+select*from lista_espera
+
+select quantidade from lugares where data_disponiveis = '2017-11-23'
+
+insert into usuario (email,login,senha,perfil,ativo)values('victor-pfw@hotmail.com','pfc','123456','ADMINISTRADOR',true);
+insert into usuario (email,login,senha,perfil,ativo)values('victor-pfw@hotmail.com','teste','123456','COMUM',true);
+insert into lista_reserva (email) values('victor-teste')
+
+delete from lista_espera
+
+update usuario set ativo ='t' where id_usuario =2
+
+
+drop table reserva
+
+update reserva set ativo ='t' where fk_key =2
+
+drop table usuario cascade
+drop table reserva cascade
+drop table lugares
+
+drop table lista_espera

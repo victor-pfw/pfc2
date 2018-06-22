@@ -1,0 +1,6 @@
+
+
+function Alerta(){
+    alert(Cadastro);
+}
+
